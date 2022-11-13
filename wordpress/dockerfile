@@ -1,1 +1,8 @@
 FROM alpine
+RUN apk update && apk upgrade && apk add mariadb
+RUN apk add mariadb 
+RUN apk add openrc
+RUN openrc
+RUN touch /run/openrc/softlevel
+RUN mariadb setup
+CMD  mariadb -u root
