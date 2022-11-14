@@ -1,15 +1,9 @@
 #!/bin/sh
-/etc/init.d/mariadb setup
-rc-service mariadb start
-# rc-service mariadb stop
 
 echo "1- change configuration"
-cd /etc/my.cnf.d/
+cd /etc/mysql/mariadb.conf.d
 
-sed -i  's/skip-networking/#skip-networking/' mariadb-server.cnf
-sed -i  's/#bind-address=0.0.0.0/bind-address=0.0.0.0/' mariadb-server.cnf
-sed -i	'11i port=3306' mariadb-server.cnf
-sed -i	'12i socket=/run/mysqld' mariadb-server.cnf
+sed -i 's/^#port                   = 3306/port = 3306/' 50-server.cnf
 
 echo "----------configuration done-----------" 
 
@@ -24,4 +18,3 @@ echo "GRANT ALL PRIVILEGES ON yourdb.* TO 'hliwa'@localhost;" | mariadb -u root
 echo "FLUSH PRIVILEGES;" | mariadb -u root
 
 echo "----------configuration done-----------"
-mysqld_safe

@@ -1,12 +1,13 @@
-FROM alpine:latest
-RUN apk update && apk upgrade && apk add mariadb
-RUN apk add mariadb-client 
-RUN apk add openrc
-COPY sqlscript.sh /etc/my.cnf.d/sqlscript.sh
-RUN openrc
-RUN touch /run/openrc/softlevel
+FROM debian:buster
+# RUN  apt-get update && apt-get install -y --no-install-recommends apt-utils
+RUN  apt-get update 
+RUN apt-get install mariadb-server -y
 
-EXPOSE 3306
+COPY sqlscript.sh  /etc/mysql/
 
-ENTRYPOINT [ "/bin/sh", "/etc/my.cnf.d/sqlscript.sh"]
+COPY auto_secure_install.sql  /etc/mysql/
+RUN service mysql start && mysql -sfu root < /etc/mysql/auto_secure_install.sql \
+    && /bin/sh /etc/mysql/sqlscript.sh
+
+CMD [ "mysqld" ]
 
