@@ -1,13 +1,13 @@
 # nginx
 
 - how to config nginx with tls1.2 | tls1.3: \
-	[title](https://www.cyberciti.biz/faq/configure-nginx-to-use-only-tls-1-2-and-1-3/)
+	[configure-nginx-to-use-only-tls](https://www.cyberciti.biz/faq/configure-nginx-to-use-only-tls-1-2-and-1-3/)
 - to get certificate and learn more about openssl \
 	1 - important : \
-	[title](https://www.digicert.com/kb/ssl-support/openssl-quick-reference-guide.htm#:~:text=OpenSSL%20is%20an%20open%2Dsource,certificate%2C%20and%20identify%20certificate%20information)
-	[title](http://www.steves-internet-guide.com/ssl-certificates-explained/)
+	[openssl-quick-reference-guide](https://www.digicert.com/kb/ssl-support/openssl-quick-reference-guide.htm#:~:text=OpenSSL%20is%20an%20open%2Dsource,certificate%2C%20and%20identify%20certificate%20information) \
+	[ssl-certificates-explained](http://www.steves-internet-guide.com/ssl-certificates-explained/)
 	2 - secondary: \
-	[title](https://connect.ed-diamond.com/GNU-Linux-Magazine/glmf-226/prise-en-main-de-tls-1.3-avec-openssl-1.1.1)
+	[prise-en-main-de-tls](https://connect.ed-diamond.com/GNU-Linux-Magazine/glmf-226/prise-en-main-de-tls-1.3-avec-openssl-1.1.1)
 - Creating Your CSR with One Command\
 	```
 		openssl req -new -x509 -nodes -days 365 -newkey rsa:2048 \
