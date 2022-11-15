@@ -28,26 +28,28 @@ services:
     #   MYSQL_ROOT_PASSWORD: secret
     #   MYSQL_USER: hliwa
     #   MYSQL_PASSWORD: secret
-    # networks:
-    #   - app-network
+    networks:
+      - app-network
     ports:
       - "3306:3306"
+    volumes:
+      - data:/var/lib/mysql
     # restart: always
-    # volumes:
-    #   - db_data:/var/lib/mysql
 
-  # adminer:
-  #   build: ./adminer/
-  #   image: adminer
-  #   container_name: adminer
-  #   ports:
-  #     - "8080:8080"
-    # networks:
-    #   - app-network
-    # restart: always
-# volumes:
-#   db_data:
+  adminer:
+    # build: ./adminer/
+    image: adminer
+    container_name: adminer
+    ports:
+      - "8080:8080"
+    networks:
+      - app-network
+    restart: always
 
-# networks:
-#   app-network:
-#     driver: bridge
+networks:
+  app-network:
+    driver: bridge
+  
+volumes:
+  data:
+

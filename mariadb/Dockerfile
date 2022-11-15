@@ -6,8 +6,10 @@ RUN apt-get install mariadb-server -y
 COPY sqlscript.sh  /etc/mysql/
 
 COPY auto_secure_install.sql  /etc/mysql/
-RUN service mysql start && mysql -sfu root < /etc/mysql/auto_secure_install.sql \
-    && /bin/sh /etc/mysql/sqlscript.sh
+RUN /bin/sh /etc/mysql/sqlscript.sh
+RUN service mysql start && mysql -sfu root < /etc/mysql/auto_secure_install.sql 
 
-CMD [ "mysqld" ]
+expose 3306
+
+CMD [ "mysqld_safe" ]
 
