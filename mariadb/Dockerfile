@@ -1,6 +1,5 @@
 FROM debian:buster
-# RUN  apt-get update && apt-get install -y --no-install-recommends apt-utils
-RUN  apt-get update 
+RUN  apt-get update && apt-get install -y --no-install-recommends apt-utils
 RUN apt-get install mariadb-server -y
 
 COPY sqlscript.sh  /etc/mysql/
