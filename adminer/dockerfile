@@ -1,0 +1,12 @@
+FROM debian:buster
+
+RUN apt-get update -y && apt-get install wget -y 
+
+# RUN mkdir  /var/www/html/Adminer/
+
+# WORKDIR /var/www/html/Adminer/
+# RUN wget https://github.com/vrana/adminer/releases/download/v4.7.3/adminer-4.7.3.php && mv adminer-4.7.3.php adminer.php \
+#     && chmod 755 -R /var/www/html/Adminer/adminer.php \
+#     && chown -R www-data:www-data /var/www/html/Adminer/
+
+CMD ["php" "-S" "[::]:8080" "-t" "/var/www/html"]
