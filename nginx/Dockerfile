@@ -10,12 +10,15 @@
 #                                                                              #
 # **************************************************************************** #
 
-FROM alpine:latest
-RUN apk update && apk add nginx
-RUN apk add vim && apk add openssl && apk add openrc
-COPY nginx_config.sh /etc/nginx/http.d/
-RUN chmod +x etc/nginx/http.d/nginx_config.sh
+FROM debian:buster
+RUN apt-get update && apt-get install -y --no-install-recommends apt-utils \
+    && apt-get install nginx -y \
+    && apt-get install -y openssl
+
+COPY nginx_config.sh /etc/nginx/conf.d/
+
+RUN /bin/sh /etc/nginx/http.d/nginx_config.sh
 
 EXPOSE 443
 
-ENTRYPOINT ./etc/nginx/http.d/nginx_config.sh
+CMD ["nginx", "-g", "daemon off;"]

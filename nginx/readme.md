@@ -8,7 +8,7 @@
 	[ssl-certificates-explained](http://www.steves-internet-guide.com/ssl-certificates-explained/) \
 	2 - secondary: \
 	[prise-en-main-de-tls](https://connect.ed-diamond.com/GNU-Linux-Magazine/glmf-226/prise-en-main-de-tls-1.3-avec-openssl-1.1.1) 
-- Creating Your CSR with One Command\
+- Creating Your CSR with One Command
 	```
 		openssl req -new -x509 -nodes -days 365 -newkey rsa:2048 \
 		-keyout /etc/nginx/ssl/selfsigned.key -out /etc/nginx/ssl/selfsigned.crt
@@ -21,7 +21,7 @@
 	##### out arg       output file
 
 
-- in nginx conf file ( /etc/nginx/http.d/default.conf ) add:\
+- in nginx conf file ( /etc/nginx/http.d/default.conf ) add:
 
 ```
 	server
@@ -43,10 +43,10 @@
 		}
 ```
 
-- Test Nginx TLS 1.3 support: \
+- Test Nginx TLS 1.3 support: 
 ```
 	curl -I -v --tlsv1.3 --tls-max 1.3 https://localhost:443 
 ```
 
-- recource: \
+- resource: \
 https://www.nginx.com/resources/wiki/start/topics/examples/full/
