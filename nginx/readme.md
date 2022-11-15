@@ -20,10 +20,10 @@
 
 in nginx conf file ( /etc/nginx/http.d/default.conf ) add:
 
-server
+{server
 	{
 		listen 443 ssl http2;
-    	listen [::]:443 ssl http2;
+    		listen [::]:443 ssl http2;
 
 
 		ssl_certificate /etc/nginx/ssl/selfsigned.crt;
@@ -37,6 +37,7 @@ server
 		ssl_prefer_server_ciphers off;
 
 	}
+}
 
 Test Nginx TLS 1.3 support:
 	curl -I -v --tlsv1.3 --tls-max 1.3 https://localhost:443 
