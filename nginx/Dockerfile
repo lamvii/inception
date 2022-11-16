@@ -15,9 +15,9 @@ RUN apt-get update && apt-get install -y --no-install-recommends apt-utils \
     && apt-get install nginx -y \
     && apt-get install -y openssl
 
-COPY nginx_config.sh /etc/nginx/sites-enabled/
+COPY nginx_config.sh /tmp/
 
-RUN /bin/sh /etc/nginx/sites-enabled/nginx_config.sh
+RUN /bin/bash /tmp/nginx_config.sh
 
 EXPOSE 443
 
