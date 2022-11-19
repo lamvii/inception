@@ -16,8 +16,8 @@ sed -i '27i		# TLS 1.3 only' /etc/nginx/sites-enabled/default
 sed -i '28i		ssl_protocols TLSv1.3;' /etc/nginx/sites-enabled/default
 sed -i "30i #newline :)" /etc/nginx/sites-enabled/default;
 
-sed -i "s/listen 80 default_server;/listen 443 ssl http2;/" /etc/nginx/sites-enabled/default
-sed -i "s/listen \[::\]:80 default_server;/listen \[::\]:443 ssl http2;/" /etc/nginx/sites-enabled/default
+sed -i "s/listen 80 default_server;/listen 443 ssl default_server;/" /etc/nginx/sites-enabled/default
+sed -i "s/listen \[::\]:80 default_server;/listen \[::\]:443 ssl default_server;/" /etc/nginx/sites-enabled/default
 
 nginx -t
 
