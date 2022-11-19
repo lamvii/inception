@@ -12,41 +12,52 @@
        
 version: '3'
 services:
-  nginx:
-    build: ./nginx/
-    image: nginx
-    container_name: nginx
+  # nginx:
+  #   build:
+  #     context: ./nginx/
+  #     args:
+  #       _CERTIF: $_CERTIF
+  #       _CERTIF_key: $_CERTIF_key
+  #       _CERTIF_crt : $_CERTIF_crt
+  #   image: nginx
+  #   container_name: nginx
+  #   env_file: .env
+  #   ports:
+  #     - "443:443"
+  #   restart: always
+
+  7ayawan:
+    build: 
+        context: ./mariadb/
+        args:
+          MYSQL_ROOT_PASSWORD: $MYSQL_ROOT_PASSWORD
+          MYSQL_USER: $MYSQL_USER
+          MYSQL_PASSWORD: $MYSQL_PASSWORD
+    image: mariadb
+    container_name: mariadb
+    env_file: .env
+    networks:
+      - app-network
     ports:
-      - "443:443"
+      - "3306:3306"
+    volumes:
+      - data:/var/lib/mysql
     restart: always
 
-#   mariadb:
-#     build: ./mariadb/
-#     image: mariadb
-#     container_name: mariadb
-#     env_file: .env
-#     networks:
-#       - app-network
-#     ports:
-#       - "3306:3306"
-#     volumes:
-#       - data:/var/lib/mysql
-#     restart: always
+  adminer:
+    build: ./adminer/
+    image: adminer
+    container_name: adminer
+    ports:
+      - "8080:8080"
+    networks:
+      - app-network
+    restart: always
 
-#   adminer:
-#     build: ./adminer/
-#     image: adminer
-#     container_name: adminer
-#     ports:
-#       - "8080:8080"
-#     networks:
-#       - app-network
-#     restart: always
-
-# networks:
-#   app-network:
-#     driver: bridge
+networks:
+  app-network:
+    driver: bridge
   
-# volumes:
-#   data:
+volumes:
+  data:
 
