@@ -1,8 +1,17 @@
-FROM alpine
-RUN apk update && apk upgrade && apk add mariadb
-RUN apk add mariadb 
-RUN apk add openrc
-RUN openrc
-RUN touch /run/openrc/softlevel
-RUN mariadb setup
-CMD  mariadb -u root
+
+FROM debian:buster
+
+ARG MYSQL_ROOT_PASSWORD=$MYSQL_ROOT_PASSWORD
+ARG MYSQL_USER=$MYSQL_USER
+ARG MYSQL_PASSWORD=$MYSQL_PASSWORD
+
+RUN apt update && apt-get install nginx mariadb-server mariadb-client php-cgi php-common php-fpm php-pear php-mbstring php-zip php-net-socket php-gd php-xml-util php-gettext php-mysql php-bcmath unzip vim wget git -y
+
+
+WORKDIR /var/www/html
+RUN wget https://wordpress.org/latest.tar.gz
+
+COPY ./wp-config.sh /tmp/
+RUN /bin/bash /tmp/wp-config.sh
+
+CMD  php-fpm7.3 -F
