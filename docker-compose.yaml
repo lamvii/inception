@@ -48,6 +48,7 @@ services:
           MYSQL_USER: $MYSQL_USER
           MYSQL_PASSWORD: $MYSQL_PASSWORD
     image : wordpress
+    env_file: .env
     container_name: wordpress
     depends_on:
       - mariadb

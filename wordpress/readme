@@ -3,12 +3,11 @@
 
 ### important :How to Edit wp-config.php File in WordPress
     https://www.digitalocean.com/community/tutorials/how-to-install-wordpress-with-lemp-nginx-mariadb-and-php-on-debian-10
-
     https://tecnstuff.net/how-to-install-wordpress-with-nginx-on-debian-10/
-
 
 ### istablish comnnection between php-fmp &&nginx :
     https://serversforhackers.com/c/php-fpm-configuration-the-listen-directive
+
 ### no need
     https://www.wpbeginner.com/beginners-guide/how-to-edit-wp-config-php-file-in-wordpress/
 
