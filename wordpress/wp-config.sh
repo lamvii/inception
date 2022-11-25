@@ -13,8 +13,8 @@ sed -i "s/define( 'DB_PASSWORD', 'password_here' );/define( 'DB_PASSWORD', '$MYS
 sed -i "s/define( 'DB_HOST', 'localhost' );/define( 'DB_HOST', 'mariadb' );/"                       wp-config.php
 
 #service php7.3-fpm start
-wp core --allow-root install --url="localhost" --title="inception" --admin_user=$MYSQL_USER \
-        --admin_password=$MYSQL_PASSWORD --admin_email="ael-idri@email.com" 
+wp core --allow-root install --url="localhost" --title="inception" --admin_user=$ADMIN_USER \
+        --admin_password=$ADMIN_PASSWORD --admin_email="ael-idri@email.com" 
 
 wp --allow-root theme activate twentytwentyone
 
