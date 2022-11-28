@@ -4,6 +4,8 @@ mkdir -p /run/php/
 
 cp wp-config-sample.php wp-config.php
 
+chown -R www-data:www-data /var/www/html
+
 sed -i 's/listen = \/run\/php\/php7.3-fpm.sock/;listen = \/run\/php\/php7.3-fpm.sock/'               /etc/php/7.3/fpm/pool.d/www.conf
 sed -i '37i listen = 0.0.0.0:9000'                                                                  /etc/php/7.3/fpm/pool.d/www.conf
 
@@ -18,5 +20,10 @@ wp core --allow-root install --url="localhost" --title="inception" --admin_user=
 
 wp --allow-root theme activate twentytwentyone
 
+wp --allow-root plugin install redis-cache --activate
+wp config --allow-root set WP_REDIS_PORT 6379
+wp config --allow-root set WP_REDIS_HOST redis
+
+wp --allow-root redis enable
 
 php-fpm7.3 -F

@@ -30,8 +30,18 @@ services:
       - data:/var/lib/mysql
     restart: always
 
+  redis:
+    build: ./bonus/redis/
+    image: redis
+    container_name: redis
+    ports:
+      - "6379:6379"
+    networks:
+      - chabaka
+    restart: always
+
   adminer:
-    build: ./adminer/
+    build: ./bonus/adminer/
     image: adminer
     container_name: adminer
     ports:
@@ -54,6 +64,7 @@ services:
     container_name: wordpress
     depends_on:
       - mariadb
+      - redis
     volumes:
       - wpress:/var/www/html/
     networks:
@@ -79,6 +90,8 @@ services:
     ports:
       - "443:443"
     restart: always
+
+
 
 networks:
   chabaka:
