@@ -11,22 +11,10 @@
 # **************************************************************************** #
        
 version: '3'
-services:
-  # nginx:
-  #   build:
-  #     context: ./nginx/
-  #     args:
-  #       _CERTIF: $_CERTIF
-  #       _CERTIF_key: $_CERTIF_key
-  #       _CERTIF_crt : $_CERTIF_crt
-  #   image: nginx
-  #   container_name: nginx
-  #   env_file: .env
-  #   ports:
-  #     - "443:443"
-  #   restart: always
 
-  7ayawan:
+services:
+
+  mariadb:
     build: 
         context: ./mariadb/
         args:
@@ -37,9 +25,7 @@ services:
     container_name: mariadb
     env_file: .env
     networks:
-      - app-network
-    ports:
-      - "3306:3306"
+      - chabaka
     volumes:
       - data:/var/lib/mysql
     restart: always
@@ -51,13 +37,54 @@ services:
     ports:
       - "8080:8080"
     networks:
-      - app-network
+      - chabaka
+    restart: always
+
+  wordpress:
+    build:
+      context: ./wordpress/
+      args:
+          MYSQL_ROOT_PASSWORD: $MYSQL_ROOT_PASSWORD
+          MYSQL_USER: $MYSQL_USER
+          MYSQL_PASSWORD: $MYSQL_PASSWORD
+          ADMIN_USER: $ADMIN_USER
+          ADMIN_PASSWORD: $ADMIN_PASSWORD
+    image : wordpress
+    env_file: .env
+    container_name: wordpress
+    depends_on:
+      - mariadb
+    volumes:
+      - wpress:/var/www/html/
+    networks:
+      - chabaka
+    restart: always
+
+  nginx:
+    build:
+      context: ./nginx/
+      args:
+        _CERTIF: $_CERTIF
+        _CERTIF_key: $_CERTIF_key
+        _CERTIF_crt : $_CERTIF_crt
+    image: nginx
+    container_name: nginx
+    env_file: .env
+    volumes:
+      - wpress:/var/www/html/
+    networks:
+      - chabaka
+    depends_on:
+      - wordpress
+    ports:
+      - "443:443"
     restart: always
 
 networks:
-  app-network:
+  chabaka:
     driver: bridge
   
 volumes:
   data:
+  wpress:
 
