@@ -64,6 +64,16 @@ services:
       - chabaka
     restart: always
 
+  website:
+    build: ./bonus/website/
+    image: website
+    container_name: website
+    ports:
+      - "80:80"
+    networks:
+      - chabaka
+    restart: always
+
   wordpress:
     build:
       context: ./wordpress/
