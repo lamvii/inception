@@ -16,7 +16,7 @@ services:
 
   mariadb:
     build: 
-        context: ./mariadb/
+        context: ./srcs/requirements/mariadb/
         args:
           MYSQL_ROOT_PASSWORD: $MYSQL_ROOT_PASSWORD
           MYSQL_USER: $MYSQL_USER
@@ -31,7 +31,7 @@ services:
     restart: always
 
   redis:
-    build: ./bonus/redis/
+    build: ./srcs/requirements/bonus/redis/
     image: redis
     container_name: redis
     networks:
@@ -39,7 +39,7 @@ services:
     restart: always
 
   adminer:
-    build: ./bonus/adminer/
+    build: ./srcs/requirements/bonus/adminer/
     image: adminer
     container_name: adminer
     ports:
@@ -49,7 +49,7 @@ services:
     restart: always
 
   ftp:
-    build: ./bonus/ftp/
+    build: ./srcs/requirements/bonus/ftp/
     image: ftp
     container_name: ftp
     ports:
@@ -65,7 +65,7 @@ services:
     restart: always
 
   website:
-    build: ./bonus/website/
+    build: ./srcs/requirements/bonus/website/
     image: website
     container_name: website
     ports:
@@ -74,9 +74,24 @@ services:
       - chabaka
     restart: always
 
+  cadvisor:
+    build: ./srcs/requirements/bonus/cadvisor/
+    image: cadvisor
+    container_name: cadvisor
+    ports:
+      - "8090:8080"
+    volumes:
+      - /:/rootfs:ro
+      - /var/run:/var/run:rw
+      - /sys:/sys:ro
+      - /var/lib/docker/:/var/lib/docker:ro
+    networks:
+      - chabaka
+    restart: always
+
   wordpress:
     build:
-      context: ./wordpress/
+      context: ./srcs/requirements/wordpress/
       args:
           MYSQL_ROOT_PASSWORD: $MYSQL_ROOT_PASSWORD
           MYSQL_USER: $MYSQL_USER
@@ -96,7 +111,7 @@ services:
 
   nginx:
     build:
-      context: ./nginx/
+      context: ./srcs/requirements/nginx/
       args:
         _CERTIF: $_CERTIF
         _CERTIF_key: $_CERTIF_key
@@ -122,5 +137,13 @@ networks:
   
 volumes:
   data:
+    driver_opts:
+      type: none
+      o: bind
+      device: /Users/ael-idri/Desktop/inception/data/db
   wpress:
+    driver_opts:
+      type: none
+      o: bind
+      device: /Users/ael-idri/Desktop/inception/data/wp
 
