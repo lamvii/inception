@@ -1,0 +1,13 @@
+FROM debian:buster
+
+RUN  apt-get update && apt-get install vsftpd vim -y
+RUN cp /etc/vsftpd.conf /etc/vsftpd.conf.bak
+
+COPY ftp-conf.sh /tmp
+RUN /bin/bash /tmp/ftp-conf.sh
+
+EXPOSE 20
+
+CMD [ "vsftpd" ]
+
+

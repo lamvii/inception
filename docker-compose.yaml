@@ -34,8 +34,6 @@ services:
     build: ./bonus/redis/
     image: redis
     container_name: redis
-    ports:
-      - "6379:6379"
     networks:
       - chabaka
     restart: always
@@ -46,6 +44,22 @@ services:
     container_name: adminer
     ports:
       - "8080:8080"
+    networks:
+      - chabaka
+    restart: always
+
+  ftp:
+    build: ./bonus/ftp/
+    image: ftp
+    container_name: ftp
+    ports:
+      - "20:20"
+      - "21:21"
+      - "10000-10100:10000-10100"
+    environment:
+      - FTP_USER=hliwa
+      - FTP_PASS=secret
+      - PASV_ADDRESS=localhost
     networks:
       - chabaka
     restart: always
@@ -64,7 +78,6 @@ services:
     container_name: wordpress
     depends_on:
       - mariadb
-      - redis
     volumes:
       - wpress:/var/www/html/
     networks:
