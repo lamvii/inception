@@ -16,9 +16,7 @@ ARG _CERTIF=$_CERTIF
 ARG _CERTIF_key=$_CERTIF_key
 ARG _CERTIF_crt=$_CERTIF_crt
 
-RUN apt-get update && apt-get install -y --no-install-recommends apt-utils \
-    && apt-get install nginx -y \
-    && apt-get install -y openssl vim
+RUN apt update; apt install  openssl vim nginx -y;
 
 COPY nginx_config.sh /tmp/
 

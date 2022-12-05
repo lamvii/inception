@@ -7,11 +7,9 @@ ARG MYSQL_PASSWORD=$MYSQL_PASSWORD
 ARG ADMIN_USER=$ADMIN_USER
 ARG ADMIN_PASSWORD=$ADMIN_PASSWORD
 
-# RUN apt update && apt-get install nginx mariadb-server mariadb-client php-cgi php-common php-fpm php-pear php-mbstring php-zip php-net-socket php-gd php-xml-util php-gettext php-mysql php-bcmath unzip vim wget git -y
-RUN apt update && apt-get install php-cgi php-common php-fpm php-pear php-mbstring php-zip php-net-socket php-gd php-xml-util php-gettext php-mysql php-bcmath unzip vim curl git -y
+RUN apt update && apt-get install php-fpm php-mysql vim curl -y
 
 WORKDIR /var/www/html
-# RUN wget https://wordpress.org/latest.tar.gz
 
 RUN curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
 RUN chmod +x wp-cli.phar

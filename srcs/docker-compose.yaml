@@ -16,7 +16,7 @@ services:
 
   mariadb:
     build: 
-        context: ./srcs/requirements/mariadb/
+        context: ./requirements/mariadb/
         args:
           MYSQL_ROOT_PASSWORD: $MYSQL_ROOT_PASSWORD
           MYSQL_USER: $MYSQL_USER
@@ -30,16 +30,16 @@ services:
       - data:/var/lib/mysql
     restart: always
 
-  redis:
-    build: ./srcs/requirements/bonus/redis/
-    image: redis
-    container_name: redis
-    networks:
-      - chabaka
-    restart: always
+  # redis:
+  #   build: ./requirements/bonus/redis/
+  #   image: redis
+  #   container_name: redis
+  #   networks:
+  #     - chabaka
+  #   restart: always
 
   adminer:
-    build: ./srcs/requirements/bonus/adminer/
+    build: ./requirements/bonus/adminer/
     image: adminer
     container_name: adminer
     ports:
@@ -48,50 +48,50 @@ services:
       - chabaka
     restart: always
 
-  ftp:
-    build: ./srcs/requirements/bonus/ftp/
-    image: ftp
-    container_name: ftp
-    ports:
-      - "20:20"
-      - "21:21"
-      - "10000-10100:10000-10100"
-    environment:
-      - FTP_USER=hliwa
-      - FTP_PASS=secret
-      - PASV_ADDRESS=localhost
-    networks:
-      - chabaka
-    restart: always
+  # ftp:
+  #   build: ./requirements/bonus/ftp/
+  #   image: ftp
+  #   container_name: ftp
+  #   ports:
+  #     - "20:20"
+  #     - "21:21"
+  #     - "10000-10100:10000-10100"
+  #   environment:
+  #     - FTP_USER=hliwa
+  #     - FTP_PASS=secret
+  #     - PASV_ADDRESS=localhost
+  #   networks:
+  #     - chabaka
+  #   restart: always
 
-  website:
-    build: ./srcs/requirements/bonus/website/
-    image: website
-    container_name: website
-    ports:
-      - "80:80"
-    networks:
-      - chabaka
-    restart: always
+  # website:
+  #   build: ./requirements/bonus/website/
+  #   image: website
+  #   container_name: website
+  #   ports:
+  #     - "80:80"
+  #   networks:
+  #     - chabaka
+  #   restart: always
 
-  cadvisor:
-    build: ./srcs/requirements/bonus/cadvisor/
-    image: cadvisor
-    container_name: cadvisor
-    ports:
-      - "8090:8080"
-    volumes:
-      - /:/rootfs:ro
-      - /var/run:/var/run:rw
-      - /sys:/sys:ro
-      - /var/lib/docker/:/var/lib/docker:ro
-    networks:
-      - chabaka
-    restart: always
+  # cadvisor:
+  #   build: ./requirements/bonus/cadvisor/
+  #   image: cadvisor
+  #   container_name: cadvisor
+  #   ports:
+  #     - "8090:8080"
+  #   volumes:
+  #     - /:/rootfs:ro
+  #     - /var/run:/var/run:rw
+  #     - /sys:/sys:ro
+  #     - /var/lib/docker/:/var/lib/docker:ro
+  #   networks:
+  #     - chabaka
+  #   restart: always
 
   wordpress:
     build:
-      context: ./srcs/requirements/wordpress/
+      context: ./requirements/wordpress/
       args:
           MYSQL_ROOT_PASSWORD: $MYSQL_ROOT_PASSWORD
           MYSQL_USER: $MYSQL_USER
@@ -111,7 +111,7 @@ services:
 
   nginx:
     build:
-      context: ./srcs/requirements/nginx/
+      context: ./requirements/nginx/
       args:
         _CERTIF: $_CERTIF
         _CERTIF_key: $_CERTIF_key
@@ -140,10 +140,10 @@ volumes:
     driver_opts:
       type: none
       o: bind
-      device: /Users/ael-idri/Desktop/inception/data/db
+      device: /home/ael-idri/data/db
   wpress:
     driver_opts:
       type: none
       o: bind
-      device: /Users/ael-idri/Desktop/inception/data/wp
+      device: /home/ael-idri/data/wp
 
