@@ -18,7 +18,7 @@ sed -i "s/define( 'DB_HOST', 'localhost' );/define( 'DB_HOST', 'mariadb' );/"   
 wp core --allow-root install --url="https://ael-idri.42.fr" --title="inception" --admin_user=$ADMIN_USER \
         --admin_password=$ADMIN_PASSWORD --admin_email="ael-idri@email.com" 
 
-wp user create hliwa hliwa@email.com
+wp --allow-root user create hliwa hliwa@email.com
 
 wp --allow-root theme activate twentytwentyone
 

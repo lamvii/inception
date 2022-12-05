@@ -30,13 +30,13 @@ services:
       - data:/var/lib/mysql
     restart: always
 
-  # redis:
-  #   build: ./requirements/bonus/redis/
-  #   image: redis
-  #   container_name: redis
-  #   networks:
-  #     - chabaka
-  #   restart: always
+  redis:
+    build: ./requirements/bonus/redis/
+    image: redis
+    container_name: redis
+    networks:
+      - chabaka
+    restart: always
 
   adminer:
     build: ./requirements/bonus/adminer/
@@ -64,15 +64,15 @@ services:
   #     - chabaka
   #   restart: always
 
-  # website:
-  #   build: ./requirements/bonus/website/
-  #   image: website
-  #   container_name: website
-  #   ports:
-  #     - "80:80"
-  #   networks:
-  #     - chabaka
-  #   restart: always
+  website:
+    build: ./requirements/bonus/website/
+    image: website
+    container_name: website
+    ports:
+      - "80:80"
+    networks:
+      - chabaka
+    restart: always
 
   # cadvisor:
   #   build: ./requirements/bonus/cadvisor/
