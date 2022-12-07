@@ -1,9 +1,12 @@
 
 
+### very important: using wpcli to install wordpress:
+    https://www.hostinger.fr/tutoriels/wp-cli
 
 ### important :How to Edit wp-config.php File in WordPress
     https://www.digitalocean.com/community/tutorials/how-to-install-wordpress-with-lemp-nginx-mariadb-and-php-on-debian-10
     https://tecnstuff.net/how-to-install-wordpress-with-nginx-on-debian-10/
+    
 
 ### istablish comnnection between php-fmp &&nginx :
     https://serversforhackers.com/c/php-fpm-configuration-the-listen-directive
