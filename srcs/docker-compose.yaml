@@ -48,21 +48,21 @@ services:
       - chabaka
     restart: always
 
-  # ftp:
-  #   build: ./requirements/bonus/ftp/
-  #   image: ftp
-  #   container_name: ftp
-  #   ports:
-  #     - "20:20"
-  #     - "21:21"
-  #     - "10000-10100:10000-10100"
-  #   environment:
-  #     - FTP_USER=hliwa
-  #     - FTP_PASS=secret
-  #     - PASV_ADDRESS=localhost
-  #   networks:
-  #     - chabaka
-  #   restart: always
+  ftp:
+    build: ./requirements/bonus/ftp/
+    image: ftp
+    container_name: ftp
+    ports:
+      - "20:20"
+      - "21:21"
+      - "10000-10100:10000-10100"
+    environment:
+      - FTP_USER=hliwa
+      - FTP_PASS=secret
+      - PASV_ADDRESS=localhost
+    networks:
+      - chabaka
+    restart: always
 
   website:
     build: ./requirements/bonus/website/
@@ -74,20 +74,20 @@ services:
       - chabaka
     restart: always
 
-  # cadvisor:
-  #   build: ./requirements/bonus/cadvisor/
-  #   image: cadvisor
-  #   container_name: cadvisor
-  #   ports:
-  #     - "8090:8080"
-  #   volumes:
-  #     - /:/rootfs:ro
-  #     - /var/run:/var/run:rw
-  #     - /sys:/sys:ro
-  #     - /var/lib/docker/:/var/lib/docker:ro
-  #   networks:
-  #     - chabaka
-  #   restart: always
+  cadvisor:
+    build: ./requirements/bonus/cadvisor/
+    image: cadvisor
+    container_name: cadvisor
+    ports:
+      - "8090:8080"
+    volumes:
+      - /:/rootfs:ro
+      - /var/run:/var/run:rw
+      - /sys:/sys:ro
+      - /var/lib/docker/:/var/lib/docker:ro
+    networks:
+      - chabaka
+    restart: always
 
   wordpress:
     build:
@@ -137,11 +137,13 @@ networks:
   
 volumes:
   data:
+    name: data
     driver_opts:
       type: none
       o: bind
       device: /home/ael-idri/data/db
   wpress:
+    name: wpress
     driver_opts:
       type: none
       o: bind
