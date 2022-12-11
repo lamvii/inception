@@ -19,7 +19,7 @@ These are just some of the benefits of using Docker compared to VMs. In general,
 
 Docker is a tool that is used to create and manage containers, which are lightweight, standalone, and executable packages of software that include everything needed to run the application, including the code, libraries, dependencies, and runtime. A Docker network is a virtual network that is used to connect Docker containers. It allows containers to communicate with each other and access the network resources they need in order to function properly. Docker networks are a key part of the Docker ecosystem and provide an important layer of abstraction and isolation for containers.
 
-# Network driver summary:
+#### Network driver summary:
 
 User-defined bridge:
  networks are best when you need multiple containers to communicate on the same Docker host.
@@ -31,5 +31,11 @@ User-defined bridge:
  are best when you are migrating from a VM setup or need your containers to look like physical hosts on your network, each with a unique MAC address.
 - Third-party network:
  plugins allow you to integrate Docker with specialized network stacks.
+
+### What is TLS:
+TLS (Transport Layer Security) is a cryptographic protocol that is used to secure communication over a computer network. It is designed to provide secure, end-to-end communication by encrypting data sent between devices, such as computers, smartphones, and tablets. This helps to prevent third parties from intercepting and reading the data as it is transmitted over the network. TLS is often used in conjunction with other protocols, such as HTTPS, to provide secure, encrypted communication for applications such as web browsing, email, and instant messaging.
+
+	``` TLS 1.3 is the latest version of the TLS (Transport Layer Security) cryptographic protocol. It is designed to provide improved security and performance compared to previous versions of TLS. Some of the key features of TLS 1.3 include improved encryption, faster handshake times, and support for new cipher suites. TLS 1.3 is designed to be more resistant to attacks, such as man-in-the-middle attacks, and to provide better privacy for users by removing certain features that were present in earlier versions of TLS. It is currently supported by many popular web browsers and other applications. ```
+
 
 #fix volume name 

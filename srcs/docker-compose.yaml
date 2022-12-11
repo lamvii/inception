@@ -60,6 +60,8 @@ services:
       - FTP_USER=hliwa
       - FTP_PASS=secret
       - PASV_ADDRESS=localhost
+    volumes:
+      - wpress:/home/hliwa
     networks:
       - chabaka
     restart: always
