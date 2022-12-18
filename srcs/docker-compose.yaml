@@ -139,13 +139,11 @@ networks:
   
 volumes:
   data:
-    name: data
     driver_opts:
       type: none
       o: bind
       device: /home/ael-idri/data/db
   wpress:
-    name: wpress
     driver_opts:
       type: none
       o: bind
