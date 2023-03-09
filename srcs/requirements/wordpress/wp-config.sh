@@ -2,9 +2,11 @@
 
 mkdir -p /run/php/
 
+wp --allow-root core download
+chown -R www-data:www-data /var/www/html
+
 cp wp-config-sample.php wp-config.php
 
-chown -R www-data:www-data /var/www/html
 
 sed -i 's/listen = \/run\/php\/php7.3-fpm.sock/;listen = \/run\/php\/php7.3-fpm.sock/'               /etc/php/7.3/fpm/pool.d/www.conf
 sed -i '37i listen = 9000'                                                                  /etc/php/7.3/fpm/pool.d/www.conf
@@ -18,7 +20,7 @@ sed -i "s/define( 'DB_HOST', 'localhost' );/define( 'DB_HOST', 'mariadb' );/"   
 wp core --allow-root install --url="https://ael-idri.42.fr" --title="inception" --admin_user=$ADMIN_USER \
         --admin_password=$ADMIN_PASSWORD --admin_email="ael-idri@email.com" 
 
-wp --allow-root user create hliwa hliwa@email.com
+wp --allow-root user create hliwa hliwa@email.com --user_pass=hliwa --role=author
 
 wp --allow-root theme activate twentytwentyone
 

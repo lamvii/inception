@@ -1,11 +1,21 @@
 all:
 	@cd srcs; sudo docker-compose up --build; cd ..
 
+down:
+	@cd srcs; sudo docker-compose down -v; cd ..
+
 clean:
 	@cd srcs; sudo docker-compose down --rmi all -v; cd ..
-# fclean:
-# 	if [ $(sudo docker ps -qa | wc -l ) ] ;then sudo docker stop $(sudo docker ps -aq); fi 
-# 	if [ $(sudo docker ps -qa | wc -l ) ] ;then sudo docker rm $(sudo docker ps -aq); fi 
-# 	if [ $(sudo docker images -aq | wc -l ) ] ;then sudo docker rmi -f $(sudo docker images -aq); fi 
-# 	if [ $(docker volume ls -q | wc -l ) ] ;then sudo docker volume rm $(sudo docker volume ls -q); fi 
-# 	if [ $(docker network ls -q | wc -l) ] ;then sudo docker network rm $(sudo docker network ls -q); fi
+
+cleanV:
+	sudo rm -rf /home/ael-idri/data/db/*
+	sudo rm -rf /home/ael-idri/data/wp/*
+
+fclean:
+	sudo docker stop $(sudo docker ps -aq);\
+	sudo docker rm $(sudo docker ps -aq); \
+	sudo docker rmi -f $(sudo docker images -aq);\
+	sudo docker volume rm $(sudo docker volume ls -q);\
+	sudo docker network rm $(sudo docker network ls -q) 2>/dev/null
+
+.Phony: all clean cleanV down

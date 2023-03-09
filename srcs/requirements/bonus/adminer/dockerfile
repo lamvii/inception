@@ -1,8 +1,7 @@
 FROM debian:buster
 
-RUN apt-get update -y && apt-get install -y --no-install-recommends apt-utils \
-    && apt-get install apache2 wget -y 
-RUN apt install php libapache2-mod-php php-mysql php-mbstring php-xml php-zip -y
+RUN apt-get update -y && apt-get install wget -y 
+RUN apt install php php-mysql  -y
 
 RUN mkdir  /var/www/html/Adminer/
 

@@ -1,21 +1,50 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Dockerfile                                         :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: ael-idri <ael-idri@student.42.fr>          +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2022/11/05 11:34:00 by ael-idri          #+#    #+#              #
-#    Updated: 2022/11/05 11:51:41 by ael-idri         ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
-       
+    
 version: '3'
 
 services:
 
+  nginx:
+    build:
+      context: ./requirements/nginx/
+      args:
+        _CERTIF: $_CERTIF
+        _CERTIF_key: $_CERTIF_key
+        _CERTIF_crt : $_CERTIF_crt
+    image: nginx
+    container_name: nginx
+    env_file: .env
+    volumes:
+      - wpress:/var/www/html/
+    networks:
+      - chabaka
+    depends_on:
+      - wordpress
+    ports:
+      - "443:443"
+    restart: always
+
+  wordpress:
+    build:
+      context: ./requirements/wordpress/
+      args:
+          MYSQL_ROOT_PASSWORD: $MYSQL_ROOT_PASSWORD
+          MYSQL_USER: $MYSQL_USER
+          MYSQL_PASSWORD: $MYSQL_PASSWORD
+          ADMIN_USER: $ADMIN_USER
+          ADMIN_PASSWORD: $ADMIN_PASSWORD
+    image : wordpress
+    env_file: .env
+    container_name: wordpress
+    depends_on:
+      - mariadb
+    volumes:
+      - wpress:/var/www/html/
+    networks:
+      - chabaka
+    restart: always
+
   mariadb:
-    build: 
+    build:
         context: ./requirements/mariadb/
         args:
           MYSQL_ROOT_PASSWORD: $MYSQL_ROOT_PASSWORD
@@ -92,47 +121,6 @@ services:
     networks:
       - chabaka
     restart: always
-
-  wordpress:
-    build:
-      context: ./requirements/wordpress/
-      args:
-          MYSQL_ROOT_PASSWORD: $MYSQL_ROOT_PASSWORD
-          MYSQL_USER: $MYSQL_USER
-          MYSQL_PASSWORD: $MYSQL_PASSWORD
-          ADMIN_USER: $ADMIN_USER
-          ADMIN_PASSWORD: $ADMIN_PASSWORD
-    image : wordpress
-    env_file: .env
-    container_name: wordpress
-    depends_on:
-      - mariadb
-    volumes:
-      - wpress:/var/www/html/
-    networks:
-      - chabaka
-    restart: always
-
-  nginx:
-    build:
-      context: ./requirements/nginx/
-      args:
-        _CERTIF: $_CERTIF
-        _CERTIF_key: $_CERTIF_key
-        _CERTIF_crt : $_CERTIF_crt
-    image: nginx
-    container_name: nginx
-    env_file: .env
-    volumes:
-      - wpress:/var/www/html/
-    networks:
-      - chabaka
-    depends_on:
-      - wordpress
-    ports:
-      - "443:443"
-    restart: always
-
 
 
 networks:
